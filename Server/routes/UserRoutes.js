@@ -36,6 +36,9 @@ userRoute.post(
     "/",
     asyncHandler(async (req,res) => {
         const { name,email,password,isAdmin,isStaff} =req.body;
+        if(!(name && email && password)) {
+            throw new Error('please provide all informations')
+        }
         const userExists = await User.findOne({ email })
         if ( userExists ) {
             res.status(400)
