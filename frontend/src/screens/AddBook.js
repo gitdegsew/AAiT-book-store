@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
+
 
 const AddBook = () => {
+  
   const [book, setBook] = useState({
     title: '',
     author: '',
@@ -12,6 +16,8 @@ const AddBook = () => {
     image: '',
     forstaffonly: false,
   });
+
+  const history = useHistory();
 
   const handleChange = (e) => {
     setBook({ ...book, [e.target.name]: e.target.value });
@@ -30,7 +36,7 @@ const AddBook = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const response = await axios.post('/api/books/all', book, config);
+        const response = await axios.post('http://localhost:5000/api/books', book, config);
         console.log(response.data);
         // Clear the form
         setBook({
@@ -43,6 +49,7 @@ const AddBook = () => {
           image: '',
           forstaffonly: false,
         });
+        history.push('/');
       } catch (error) {
         console.error(error);
       }

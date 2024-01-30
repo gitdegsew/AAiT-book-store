@@ -6,9 +6,9 @@ function AdminRouter({ component: Component, ...rest }) {
     <Route
       {...rest}
       component={(props) => {
-        const token = JSON.parse(localStorage.getItem('userInfo')).isAdmin
-        console.log("token is :",token)
-        if (token) {
+        const isAdmin = JSON.parse(localStorage.getItem('userInfo')).isAdmin
+        
+        if (isAdmin) {
           return <Component {...props} />;
         } else {
           return <Redirect to={"/"} />;
