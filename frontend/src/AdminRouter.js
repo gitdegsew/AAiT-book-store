@@ -1,21 +1,21 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
-function PrivateRouter({ component: Component, ...rest }) {
+function AdminRouter({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
       component={(props) => {
-        const token = window.localStorage.getItem("userInfo");
+        const token = JSON.parse(localStorage.getItem('userInfo')).isAdmin
         console.log("token is :",token)
         if (token) {
           return <Component {...props} />;
         } else {
-          return <Redirect to={"/login"} />;
+          return <Redirect to={"/"} />;
         }
       }}
     />
   );
 }
 
-export default PrivateRouter;
+export default AdminRouter;

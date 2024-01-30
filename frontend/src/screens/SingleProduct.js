@@ -10,7 +10,7 @@ import { PRODUCTION_CREATE_REVIEW_RESET } from "../Redux/Constants/ProductConsta
 import moment from "moment";
 
 const SingleProduct = ({ history , match }) => {
-const [qty, setQty] = useState(1);
+// const [qty, setQty] = useState(1);
 const [rating, setRating] = useState(1);
 const [comment, setComment] = useState("");
 
