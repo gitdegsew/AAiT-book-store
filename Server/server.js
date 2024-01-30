@@ -8,13 +8,14 @@ import orderRoute from './routes/OrderRoutes.js'
 import productRoute from "./routes/BookRoutes.js";
 import ImportData from "./Dataimport.js";
 import User from "./models/UserModel.js";
+import morgan from "morgan";
 
 dotenv.config()
 const app =express();
 connectDatabase();
 app.use(express.json())
 app.use('/', ImportData);
-
+app.use(morgan('dev'))
 app.use("/api/users",userRoute)
 app.use("/api/orders",orderRoute)
 app.use("/api/books", productRoute);

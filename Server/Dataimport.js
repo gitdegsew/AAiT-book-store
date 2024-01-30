@@ -1,14 +1,10 @@
 import express from 'express';
 import User from './models/UserModel.js';
-import bcrypt from "bcryptjs"
-
-
-
-
+import users from './data/users.js';
 import asyncHandler from "express-async-handler";
 import book from "./models/BookModel.js";
-import users from "./data/users.js";
 import products from "./data/books.js";
+import bcrypt from 'bcrypt'; 
 
 const ImportData = express.Router();
 
@@ -30,30 +26,39 @@ ImportData.get("/users", async (req, res) => {
   }
 });
 
+// ImportData.post(
+//   "/users",
+//   asyncHandler(async (req, res) => {
+//     await User.deleteMany({});
+//     const importUser = await User.insertMany(users);
+//     res.send({ importUser });
+//   })
+// );
+
 ImportData.post(
-  "/users",
-  asyncHandler(async (req, res) => {
-    // Delete all existing users
-    await User.deleteMany({});
-
-    // Hash passwords and create a new array of users with hashed passwords
-    const usersWithHashedPasswords = await Promise.all(
-      users.map(async (user) => {
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(user.password, salt);
-        return { ...user, password: hashedPassword };
-      })
-    );
-
-    // Insert users with hashed passwords into the database
-    try {
-      const importUser = await User.insertMany(usersWithHashedPasswords);
-      res.send({ importUser });
-    } catch (error) {
-      res.status(500).send({ error: error.message });
-    }
-  })
-);
+    "/users",
+    asyncHandler(async (req, res) => {
+      // Delete all existing users
+      await User.deleteMany({});
+  
+      // Hash passwords and create a new array of users with hashed passwords
+      const usersWithHashedPasswords = await Promise.all(
+        users.map(async (user) => {
+          const salt = await bcrypt.genSalt(10);
+          const hashedPassword = await bcrypt.hash(user.password, salt);
+          return { ...user, password: hashedPassword };
+        })
+      );
+  
+      // Insert users with hashed passwords into the database
+      try {
+        const importUser = await User.insertMany(usersWithHashedPasswords);
+        res.send({ importUser });
+      } catch (error) {
+        res.status(500).send({ error: error.message });
+      }
+    })
+  );
 
 ImportData.get("/products", async (req, res) => {
   try {

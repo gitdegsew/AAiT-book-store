@@ -7,7 +7,6 @@ const productRoute=express.Router();
 productRoute.get(
     "/",
     asyncHandler(async (req,res)=>{
-        console.log("key word from get books :",req.query.keyword)
         const pageSize=6
         const page=Number(req.query.pageNumber) || 1 ;
         const keyword = req.query.keyword ? {

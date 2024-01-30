@@ -18,6 +18,11 @@ orderRouter.post(
             }
             else{
 
+              if (!req.body.orderItems || !Array.isArray(req.body.orderItems)) {
+                res.status(400)
+                throw new Error("Invalid order items");
+               } 
+               
               const book = await Product.findById(req.body.orderItems[0].product)
               if (book.countInStock>0){
                 const { id_no,
