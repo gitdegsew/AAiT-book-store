@@ -15,6 +15,8 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
+import AddBook from "./screens/AddBook";
+import AdminRouter from "./AdminRouter";
 const App = () => {
   return (
     <Router>
@@ -32,6 +34,7 @@ const App = () => {
         <PrivateRouter path="/payment" component={PaymentScreen} />
         <PrivateRouter path="/placeorder" component={PlaceOrderScreen} />
         <PrivateRouter path="/order/:id" component={OrderScreen} />
+        <AdminRouter path="/addbook" component={AddBook} />
         <Route path="*" component={NotFound} />
       </Switch>
     </Router>
