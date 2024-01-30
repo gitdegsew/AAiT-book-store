@@ -32,8 +32,8 @@ const ShippingScreen = ({history}) => {
         >
           <h6>Order From</h6>
           <input type="text" placeholder="Enter ID number" value={address} onChange={(e) => setAddress(e.target.value)}/>
-          <input type="text" placeholder="Enter Take Date dd/mm/yy"  value={city} onChange={(e) => setCity(e.target.value)}/>
-          <input type="text" placeholder="Enter return Date dd/mm/yy" value={postalCode} onChange={(e) => setPostalCode(e.target.value)}/>
+          <input type="date" placeholder="Enter Take Date dd/mm/yy"  value={city} onChange={(e) => setCity(e.target.value)}/>
+          <input type="date" placeholder="Enter return Date dd/mm/yy" value={postalCode} onChange={(e) => setPostalCode(e.target.value)}/>
           <input type="text" placeholder="Enter Department" value={country} onChange={(e) => setCountry(e.target.value)}/>
           <button type="submit">
             <Link to="/placeorder" className="text-white">

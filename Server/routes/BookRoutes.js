@@ -7,14 +7,25 @@ const productRoute=express.Router();
 productRoute.get(
     "/",
     asyncHandler(async (req,res)=>{
+        console.log("key word from get books :",req.query.keyword)
         const pageSize=6
         const page=Number(req.query.pageNumber) || 1 ;
         const keyword = req.query.keyword ? {
-            title:{
-                $regex:req.query.keyword,
-                $options: "i",
-            },
-        }
+            $or: [
+              {
+                title: {
+                  $regex: req.query.keyword,
+                  $options: "i",
+                },
+              },
+              {
+                author: {
+                  $regex: req.query.keyword,
+                  $options: "i",
+                },
+              },
+            ],
+          }
         :{}
         const count =await Product.countDocuments({ ...keyword });
         const products =await Product.find({ ...keyword }).limit(pageSize).skip(pageSize * (page - 1)).sort({_id:-1});
@@ -175,6 +186,7 @@ productRoute.delete(
       }
     })
   );
+
   
   // CREATE PRODUCT
 productRoute.post(
