@@ -9,10 +9,12 @@ import productRoute from "./routes/BookRoutes.js";
 import ImportData from "./Dataimport.js";
 import User from "./models/UserModel.js";
 import morgan from "morgan";
+import cors from 'cors';
 
 dotenv.config()
 const app =express();
 connectDatabase();
+app.use(cors());
 app.use(express.json())
 app.use('/', ImportData);
 app.use(morgan('dev'))

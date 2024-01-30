@@ -47,6 +47,18 @@ const PlaceOrderScreen = ({history}) => {
     <>
       <Header />
       <div className="container">
+        {/* the book is reserved for you , you can take it */}
+        <div className="row">
+          <div className="col-lg-12 col-md-12">
+            <div className="section-title">
+              <h2>Reserve Details</h2>
+              <p style={{backgroundColor:'lightgreen', marginBottom:"40px", color:'blue', fontSize:'30px',borderRadius:'15px', padding:'10px'}} >
+                the book is reserved for you , you can take it from the store
+                in the specified time
+              </p>
+            </div>
+          </div>
+        </div>
         <div className="row  order-detail">
           <div className="col-lg-4 col-sm-4 mb-lg-4 mb-5 mb-sm-0">
             <div className="row ">
