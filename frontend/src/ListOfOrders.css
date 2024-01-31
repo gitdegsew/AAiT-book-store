@@ -4,6 +4,8 @@
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    max-width: 1000px;
+    margin: 10px auto;
   }
   
   .error-message {
@@ -17,4 +19,18 @@
     border: 1px solid #ddd;
     border-radius: 5px;
   }
+
+
+.order-item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .order-item-image {
+    max-width: 20%; /* Set the max width as needed */
+    height: auto;
+    margin-right: 10px; /* Add margin to separate image from other details */
+  }
+ 
   
