@@ -6,18 +6,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProduct } from "../../Redux/Actions/ProductActions";
 import Loading from "../LoadingError/Loading";
 import Message from "../LoadingError/Error";
-import {clearcart} from "../../Redux/Actions/cartActions";
+import { clearcart } from "../../Redux/Actions/cartActions";
 
 const ShopSection = (props) => {
   const { keyword, pagenumber } = props;
   const dispatch = useDispatch();
-  const isAdmin = JSON.parse(localStorage.getItem('userInfo'))?JSON.parse(localStorage.getItem('userInfo')).isAdmin:false
+  const isAdmin = JSON.parse(localStorage.getItem("userInfo"))
+    ? JSON.parse(localStorage.getItem("userInfo")).isAdmin
+    : false;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
-  const removeallcart=()=>{
-    dispatch(clearcart())
-  }
- removeallcart()
+  const removeallcart = () => {
+    dispatch(clearcart());
+  };
+  removeallcart();
 
   useEffect(() => {
     dispatch(listProduct(keyword, pagenumber));
@@ -40,21 +42,20 @@ const ShopSection = (props) => {
             </div>
           </div>
         )}
-      
-        
-      
-           
-          
-          {isAdmin && (
-            <div className="col-lg-12 col-md-12">
-              <div className="addbook">
-                <Link to="/addbook">
-                  <button className="btn btn-primary">Add Book</button>
-                </Link>
-              </div>
+
+        {isAdmin && (
+          <div className="col-lg-12 col-md-12">
+            <div className="addbook">
+              <Link to="/addbook">
+                <button className="btn btn-primary">Add Book</button>
+              </Link>
+              <Link to="/orders">
+                <button className="btn btn-secondary">Show reserved books</button>
+              </Link>
             </div>
-          )}
-       
+          </div>
+        )}
+
         <div className="section">
           <div className="row">
             <div className="col-lg-12 col-md-12 article">
@@ -93,13 +94,26 @@ const ShopSection = (props) => {
                             <h3>{product.title}</h3>
                             <h3>{product.author}</h3>
                             <h3>{product.category}</h3>
-                           {/* if count in stock is 0 show all books are reserved message */}
+                            {/* if count in stock is 0 show all books are reserved message */}
                             <h3>
-                              {product.countInStock === 0
-                                ? <span style={{backgroundColor:'red', marginBottom:"40px", color:'white', fontSize:'18px',borderRadius:'5px', padding:'5px'}} > All books reserved </span>
-                                : product.countInStock}
+                              {product.countInStock === 0 ? (
+                                <span
+                                  style={{
+                                    backgroundColor: "red",
+                                    marginBottom: "40px",
+                                    color: "white",
+                                    fontSize: "18px",
+                                    borderRadius: "5px",
+                                    padding: "5px",
+                                  }}
+                                >
+                                  {" "}
+                                  All books reserved{" "}
+                                </span>
+                              ) : (
+                                product.countInStock
+                              )}
                             </h3>
-                            
                           </div>
                         </div>
                       </div>
