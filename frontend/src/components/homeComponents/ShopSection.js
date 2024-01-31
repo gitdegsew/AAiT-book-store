@@ -11,7 +11,7 @@ import {clearcart} from "../../Redux/Actions/cartActions";
 const ShopSection = (props) => {
   const { keyword, pagenumber } = props;
   const dispatch = useDispatch();
-  const isAdmin = JSON.parse(localStorage.getItem('userInfo')).isAdmin
+  const isAdmin = JSON.parse(localStorage.getItem('userInfo'))?JSON.parse(localStorage.getItem('userInfo')).isAdmin:false
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
   const removeallcart=()=>{

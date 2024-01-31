@@ -8,11 +8,14 @@ import Loading from "../components/LoadingError/Loading";
 import {createProductReview, listProductDetails } from "../Redux/Actions/ProductActions";
 import { PRODUCTION_CREATE_REVIEW_RESET } from "../Redux/Constants/ProductConstants";
 import moment from "moment";
+import axios from "axios";
 
 const SingleProduct = ({ history , match }) => {
 const [qty, setQty] = useState(1);
 const [rating, setRating] = useState(1);
 const [comment, setComment] = useState("");
+const isAdmin = JSON.parse(localStorage.getItem('userInfo')).isAdmin
+const token = JSON.parse(localStorage.getItem('userInfo')).token
 
 const productId=match.params.id;
 const dispatch=useDispatch();
@@ -32,6 +35,28 @@ const {
   success: successCreateReview
 
 }=productReviewCreate;
+const hanldeDeletBook = () => {
+  const response=window.confirm("Are you sure you want to delete this book?")
+
+    try {
+      axios.delete(`/api/books/${productId}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+
+      })
+      history.push("/")
+
+     
+    } catch (error) {
+      alert("Something went wrong")
+      
+
+    }
+   
+
+
+}
 
   useEffect(()=>{
     if (successCreateReview) {
@@ -114,7 +139,17 @@ dispatch(createProductReview(productId,{
                       <h6>Quantity</h6>
                       <h6>1</h6>
                     </div>
-                    <button onClick={AddToCartHandle} className="round-black-btn">Reserve book</button>
+                    {/* if admin delete the book button */}
+                    {isAdmin && (
+                      <div className="flex-box d-flex justify-content-between align-items-center">
+                        <button onClick={hanldeDeletBook} className="btn btn-danger">Delete Book</button>
+                      </div>
+                    )}
+
+                    {!isAdmin && (
+                       <button onClick={AddToCartHandle} className="round-black-btn">Reserve book</button>
+                    )}
+                   
                   </>
                 ) : null}
               </div>

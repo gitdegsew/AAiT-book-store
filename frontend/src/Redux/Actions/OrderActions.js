@@ -2,9 +2,13 @@ import axios from "axios";
 import { CART_CLEAR_ITEM } from "../Constants/CartConstants";
 import { ORDER_CREATE_REQUEST,ORDER_CREATE_SUCCESS,ORDER_CREATE_FAIL,ORDER_CREATE_RESET,ORDER_DETAILS_SUCCESS,ORDER_DETAILS_REQUEST,ORDER_DETAILS_FAIL, ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS, ORDER_PAY_FAIL, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_SUCCESS, ORDER_LIST_MY_FAIL } from "../Constants/OrderConstants";
 import {logout} from "./userActions"
+import { toast } from 'react-toastify';
 
 
 
+const notify = () => {
+    toast('Your reservation has been confirmed!');
+  };
 
 //CREATE ORDER
 export const createOrder = (order)=> async (dispatch,getState)=>{
@@ -22,14 +26,16 @@ export const createOrder = (order)=> async (dispatch,getState)=>{
                 Authorization:`Bearer ${userInfo.token}`
             },
         };
-        console.log("hena the great");
+        
         const {data}=await axios.post(`/api/orders`,order,config);
 
         dispatch({type:ORDER_CREATE_SUCCESS,payload:data});
         dispatch({type:CART_CLEAR_ITEM,payload:data});
-
+        
+        notify()
         localStorage.removeItem("cartItems");    
     }catch(error){
+        
         const message = 
         error.response && error.response.data.message 
         ? error.response.data.message
