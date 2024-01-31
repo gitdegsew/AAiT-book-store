@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+
 
 
 
@@ -10,12 +11,15 @@ const AddBook = () => {
     title: '',
     author: '',
     description: '',
-    category: '',
+    
     countInStock: '',
     bookcode: '',
     image: '',
     forstaffonly: false,
   });
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
@@ -25,7 +29,7 @@ const AddBook = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!book.title || !book.author || !book.description || !book.category || !book.countInStock || !book.bookcode || !book.image) {
+    if (!book.title || !book.author || !book.description || !selectedCategory || !book.countInStock || !book.bookcode || !book.image) {
       alert('Please fill all the fields');
     } else {
       try {
@@ -36,7 +40,7 @@ const AddBook = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const response = await axios.post('http://localhost:5000/api/books', book, config);
+        const response = await axios.post('http://localhost:5000/api/books', {...book,category:selectedCategory}, config);
         console.log(response.data);
         // Clear the form
         setBook({
@@ -55,9 +59,41 @@ const AddBook = () => {
       }
     }
   };
+// get categories first
+  useEffect(() => {
+    const fetchCategories = async () => {
+      
+      const token = JSON.parse(localStorage.getItem('userInfo')).token
+      try {
+       
+      const { data } = await axios.get('http://localhost:5000/api/categories/all', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        });
+      console.log(data);
+      setCategories(data);
+      setLoading(false);
+        
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+        
+      }
+    };
+    fetchCategories();
+  }
+  , []);
+
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
 
   return (
     <div className="container d-flex flex-column justify-content-center align-items-center login-center">
+      {/* go back */}
+    
+    
         
     {/* {error && <Message variant="alert-danger">{error}</Message>}
     {loading && <Loading/>} */}
@@ -88,7 +124,14 @@ const AddBook = () => {
 />
 
       
-        <input type="text" name="category" placeholder='category' value={book.category} onChange={handleChange} required />
+        <select style={{height:"60px", width:"300px",marginTop:"20px"}}  name="category" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} required>
+          <option value="">Select Category</option>
+          {categories.map((category) => (
+            <option key={category._id} value={category}>
+              {category.name}
+            </option>
+          ))}
+        </select>
 
         
         <input type="number" name="countInStock" placeholder='contInStock' value={book.countInStock} onChange={handleChange} required />

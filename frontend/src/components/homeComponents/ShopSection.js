@@ -45,12 +45,16 @@ const ShopSection = (props) => {
 
         {isAdmin && (
           <div className="col-lg-12 col-md-12">
+
             <div className="addbook">
               <Link to="/addbook">
                 <button className="btn btn-primary">Add Book</button>
               </Link>
               <Link to="/orders">
                 <button className="btn btn-secondary">Show reserved books</button>
+              </Link>
+              <Link to="/addcategory">
+                <button className="btn btn-primary">Add Category</button>
               </Link>
             </div>
           </div>

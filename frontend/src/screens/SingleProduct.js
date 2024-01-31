@@ -14,8 +14,10 @@ const SingleProduct = ({ history , match }) => {
 // const [qty, setQty] = useState(1);
 const [rating, setRating] = useState(1);
 const [comment, setComment] = useState("");
-const isAdmin = JSON.parse(localStorage.getItem('userInfo')).isAdmin
-const token = JSON.parse(localStorage.getItem('userInfo')).token
+const isAdmin = JSON.parse(localStorage.getItem("userInfo"))
+    ? JSON.parse(localStorage.getItem("userInfo")).isAdmin
+    : false;
+
 
 const productId=match.params.id;
 const dispatch=useDispatch();
@@ -36,7 +38,8 @@ const {
 
 }=productReviewCreate;
 const hanldeDeletBook = () => {
-  const response=window.confirm("Are you sure you want to delete this book?")
+  const token = JSON.parse(localStorage.getItem("userInfo")).token;
+ 
 
     try {
       axios.delete(`/api/books/${productId}`,{
