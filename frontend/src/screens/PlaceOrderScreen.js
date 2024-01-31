@@ -5,6 +5,9 @@ import { ORDER_CREATE_RESET } from "../Redux/Constants/OrderConstants";
 import Header from "./../components/Header";
 import Message from "./../components/LoadingError/Error";
 import { createOrder } from "../Redux/Actions/OrderActions";
+
+
+
 const PlaceOrderScreen = ({history}) => {
   window.scrollTo(0, 0);
 
@@ -14,13 +17,14 @@ const PlaceOrderScreen = ({history}) => {
   const {userInfo} = userLogin;
   // CALCULATE PRICE
 
-
+ 
 
   const orderCreate =useSelector ((state)=>state.orderCreate);
   const {order,success,error}=orderCreate;
 
   useEffect(()=>{
     if (success) {
+      
       history.push(`/`);
       dispatch({type:ORDER_CREATE_RESET})
     }
@@ -45,6 +49,7 @@ const PlaceOrderScreen = ({history}) => {
 
   return (
     <>
+     
       <Header />
       <div className="container">
         {/* the book is reserved for you , you can take it */}
@@ -52,10 +57,7 @@ const PlaceOrderScreen = ({history}) => {
           <div className="col-lg-12 col-md-12">
             <div className="section-title">
               <h2>Reserve Details</h2>
-              <p style={{backgroundColor:'lightgreen', marginBottom:"40px", color:'blue', fontSize:'30px',borderRadius:'15px', padding:'10px'}} >
-                the book is reserved for you , you can take it from the store
-                in the specified time
-              </p>
+             
             </div>
           </div>
         </div>
@@ -136,9 +138,9 @@ const PlaceOrderScreen = ({history}) => {
           {/* total */}
           <div className="col-lg-3 d-flex align-items-end flex-column mt-5 subtotal-order">
             {
-              cart.cartItems.lenght ===0 ? null:(
-              <button type="submit" onClick={placeOrderHandler}>
-                PLACE ORDER
+              cart.cartItems.lenght ===0  ?  null:(
+              <button   onClick={placeOrderHandler}>
+                Confirm Reservation
             </button>  
               )
               

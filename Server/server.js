@@ -10,6 +10,7 @@ import ImportData from "./Dataimport.js";
 import User from "./models/UserModel.js";
 import morgan from "morgan";
 import cors from 'cors';
+import categoryRoute from "./routes/CategoryRoutes.js";
 
 dotenv.config()
 const app =express();
@@ -21,6 +22,7 @@ app.use(morgan('dev'))
 app.use("/api/users",userRoute)
 app.use("/api/orders",orderRoute)
 app.use("/api/books", productRoute);
+app.use("/api/categories", categoryRoute);
 app.use(notFound)
 app.use(errorHandler)
 

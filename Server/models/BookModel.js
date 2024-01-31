@@ -50,6 +50,10 @@ const bookSchema=mongoose.Schema({
         type:Number,
         default:0
     },
+    category:{
+        type:String,
+        require:true
+    },
     
 },
 {

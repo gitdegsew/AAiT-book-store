@@ -17,10 +17,13 @@ import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import AddBook from "./screens/AddBook";
 import AdminRouter from "./AdminRouter";
+import { ToastContainer, toast } from 'react-toastify';
 import ListOfOrders from "./screens/ListOfOrders";
+import AddCategory from "./screens/AddCategory";
 const App = () => {
   return (
     <Router>
+      <ToastContainer />
       <Switch>
         <Route path="/" component={HomeScreen} exact />
         <Route path="/search/:keyword" component={HomeScreen} exact />
@@ -34,9 +37,12 @@ const App = () => {
         <PrivateRouter path="/shipping" component={ShippingScreen} />
         <PrivateRouter path="/payment" component={PaymentScreen} />
         <PrivateRouter path="/placeorder" component={PlaceOrderScreen} />
+       
         <PrivateRouter path="/order/:id" component={OrderScreen} />
         <AdminRouter path="/addbook" component={AddBook} />
         <AdminRouter path="/orders" component={ListOfOrders} />
+        <AdminRouter path="/addcategory" component={AddCategory} />
+
 
         <Route path="*" component={NotFound} />
       </Switch>
