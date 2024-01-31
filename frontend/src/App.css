@@ -652,3 +652,69 @@ textarea:focus {
   background-color: black;
   border: 1px solid black;
 }
+
+/* Add these styles to your component's stylesheet or App.css */
+
+.container {
+  padding: 20px;
+}
+
+.section-title {
+  margin-bottom: 20px;
+}
+
+.addbook {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.addbook button {
+  margin-left: 10px;
+}
+
+.shopcontainer {
+  margin-top: 20px;
+}
+
+.shop {
+  margin-bottom: 20px;
+}
+
+.border-product {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.border-product:hover {
+  transform: scale(1.05);
+}
+
+.shopBack {
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.shopBack img {
+  width: 100%;
+  height: auto;
+}
+
+.shoptext {
+  margin-top: 10px;
+}
+
+.shoptext h3 {
+  margin: 5px 0;
+}
+
+.alert-reserved {
+  background-color: red;
+  margin-bottom: 40px;
+  color: white;
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 5px;
+}
+

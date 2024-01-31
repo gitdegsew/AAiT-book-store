@@ -17,10 +17,7 @@ import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import AddBook from "./screens/AddBook";
 import AdminRouter from "./AdminRouter";
-<<<<<<< HEAD
 import ListOfOrders from "./screens/ListOfOrders";
-=======
->>>>>>> 96b7573c5576b2f5affa3561a5dd01dadcb2d632
 const App = () => {
   return (
     <Router>
@@ -39,10 +36,8 @@ const App = () => {
         <PrivateRouter path="/placeorder" component={PlaceOrderScreen} />
         <PrivateRouter path="/order/:id" component={OrderScreen} />
         <AdminRouter path="/addbook" component={AddBook} />
-<<<<<<< HEAD
         <AdminRouter path="/orders" component={ListOfOrders} />
-=======
->>>>>>> 96b7573c5576b2f5affa3561a5dd01dadcb2d632
+
         <Route path="*" component={NotFound} />
       </Switch>
     </Router>
