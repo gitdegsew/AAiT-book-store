@@ -10,11 +10,13 @@
     "server": "nodemon ./server.js"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/HenokMekuanint/Book_Store_Management_Application.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
+    "url": "https://github.com/HenokMekuanint/Book_Store_Management_Application/issues"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
