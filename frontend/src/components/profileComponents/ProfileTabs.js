@@ -52,7 +52,7 @@ const ProfileTabs = () => {
     <>
       <Toast />
       {error && <Message variant="alert-danger">{error}</Message>}
-      {loading && <Loading />}
+      {/* {loading && <Loading />} */}
       {updateLoading && <Loading />}
 
       <form className="row  form-container" onSubmit={submitHandler}>
