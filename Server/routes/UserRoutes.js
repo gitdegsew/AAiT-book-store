@@ -55,21 +55,31 @@ userRoute.post(
       isVerified: false,
     });
     if (user) {
-      await MailService.sendMail({
+     
+     MailService.sendMail({
         to: user.email,
         from: " AAiT Book Store  <aaitbookstore@aait.edu.et>",
         subject: "Welcome to AAiT Book Store!",
         html: createMailMessage(user.name, generateToken(user._id)),
-      });
-      res.status(201).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        isStaff: user.isStaff,
-        isVerified: user.isVerified,
-        token: generateToken(user._id),
-      });
+      }).then((value)=>{
+       
+        res.status(201).json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          isStaff: user.isStaff,
+          isVerified: user.isVerified,
+          token: generateToken(user._id),
+        });
+      }).catch((error)=>{
+        console.log("error sending email",error)
+      })
+
+      // console.log("Message sent: %s", info.messageId);
+
+
+     
     } else {
       res.status(400);
       throw new Error("Invalid User Data");
