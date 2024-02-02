@@ -48,7 +48,7 @@ const App = () => {
         <AdminRouter path="/addbook" component={AddBook} />
         <AdminRouter path="/orders" component={ListOfOrders} />
         <AdminRouter path="/addcategory" component={AddCategory} />
-        <PrivateRouter path="/users" component={VerifyUsers} />
+        <AdminRouter path="/users" component={VerifyUsers} />
 
         <Route path="*" component={NotFound} />
       </Switch>
