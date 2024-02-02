@@ -17,7 +17,7 @@ const app =express();
 connectDatabase();
 app.use(cors());
 app.use(express.json())
-// app.use('/', ImportData);
+app.use('/', ImportData);
 app.use(morgan('dev'))
 app.use("/api/users",userRoute)
 app.use("/api/orders",orderRoute)

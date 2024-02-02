@@ -16,6 +16,12 @@ const Register = ({ location, history }) => {
   const redirect = location.search ? location.search.split("=")[1] : "/";
   const userRegister = useSelector((state) => state.userRegister);
   const { error, loading, userInfo } = userRegister;
+
+  function isAaitEmail(email) {
+    const regex = /^[^\s@]+@aait\.edu\.et$/;
+    return regex.test(email);
+   }
+
   useEffect(() => {
     if (userInfo) {
       history.push(redirect);
@@ -24,8 +30,12 @@ const Register = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    // if (!isAaitEmail(email)) {
+    //    alert('Please enter an email ending with @aait.edu.et');
+    //    return;
+    // }
     dispatch(register(name, email, password));
-  };
+   };
 
   return (
     <>
