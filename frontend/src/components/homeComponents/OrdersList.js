@@ -1,7 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const OrdersList = ({ orders }) => {
+
+const OrdersList = ({ orders, setOrders }) => {
+  const handleClick = async (id) => {
+    try {
+      // Make API request to delete the order
+      const token = JSON.parse(localStorage.getItem("userInfo")).token;
+      await axios.delete(`http://localhost:5000/api/orders/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Remove the deleted order from the local state
+      setOrders((prevOrders) => prevOrders.filter((order) => order._id !== id));
+    } catch (error) {
+      console.error("Error deleting order:", error);
+    }
+  };
+
   return (
     <div>
       <div style={headerContainer}>
@@ -28,8 +47,14 @@ const OrdersList = ({ orders }) => {
             <p>Take Date: {order.takedate}</p>
             <p>Return Date: {order.returndate}</p>
             <p>Is Returned: {order.isreturned ? "Yes" : "No"}</p>
-            {/* Add other book details as needed */}
           </div>
+
+          <button
+            className="btn btn-secondary"
+            onClick={() => handleClick(order._id)}
+          >
+            Delete
+          </button>
         </div>
       ))}
     </div>
