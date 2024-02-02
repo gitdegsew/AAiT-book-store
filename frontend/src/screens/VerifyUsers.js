@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getListOfUsers } from "../Redux/Actions/userActions";
+import { getListOfUsers, verifyUser } from "../Redux/Actions/userActions";
 import "./verifyUsers.css";
 import Loading from "./../components/LoadingError/Loading";
 import Message from "./../components/LoadingError/Error";
@@ -13,7 +13,9 @@ function VerifyUsers() {
     dispatch(getListOfUsers());
   }, [dispatch]);
 
-  const handleVerifyAccount = (id) => {};
+  const handleVerifyAccount = (id) => {
+    dispatch(verifyUser(id));
+  };
 
   return (
     <div className="user-verification-table">
